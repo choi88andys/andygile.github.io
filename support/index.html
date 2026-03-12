@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en" data-base="..">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Support — Andygile</title>
+  <meta name="description" content="Get help with Andygile apps. Find answers to common questions or contact us directly.">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Support — Andygile">
+  <meta property="og:description" content="Get help with Andygile apps.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://andygile.com/support/">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="../assets/css/global.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/app-page.css">
+
+  <style>
+    .support-hero {
+      padding: calc(var(--nav-height) + 4rem) 1.5rem 3rem;
+      text-align: center;
+    }
+    .support-hero__title { margin-bottom: 1rem; }
+    .support-hero__subtitle { font-size: 1.125rem; }
+
+    .faq { padding: 0 1.5rem 4rem; }
+    .faq__section { max-width: 760px; margin: 0 auto 3rem; }
+    .faq__section-title {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .faq__section-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.875rem;
+      flex-shrink: 0;
+    }
+    .faq__section-icon--ocean { background: var(--accent-ocean); }
+    .faq__section-icon--warm { background: var(--accent-warm); }
+
+    .faq__item {
+      border: 1px solid var(--border);
+      border-radius: var(--border-radius-sm);
+      margin-bottom: 0.75rem;
+      overflow: hidden;
+    }
+    .faq__question {
+      width: 100%;
+      text-align: left;
+      padding: 1rem 1.25rem;
+      font-size: 1rem;
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      background: var(--bg-secondary);
+      transition: background-color var(--transition-fast);
+    }
+    .faq__question:hover { background: var(--bg-tertiary); }
+    .faq__question svg {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      transition: transform var(--transition-base);
+      color: var(--text-secondary);
+    }
+    .faq__item.open .faq__question svg {
+      transform: rotate(180deg);
+    }
+    .faq__answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height var(--transition-base);
+    }
+    .faq__item.open .faq__answer {
+      max-height: 500px;
+    }
+    .faq__answer-inner {
+      padding: 1rem 1.25rem;
+      font-size: 0.9375rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .contact-section {
+      text-align: center;
+      padding: 4rem 1.5rem;
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border);
+    }
+    .contact-section__title { margin-bottom: 1rem; }
+    .contact-section__desc {
+      font-size: 1.125rem;
+      margin-bottom: 2rem;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to content</a>
+
+  <div id="nav-placeholder"></div>
+
+  <main id="main-content">
+    <section class="support-hero">
+      <h1 class="support-hero__title">Support</h1>
+      <p class="support-hero__subtitle">Find answers to common questions or reach out to us directly.</p>
+    </section>
+
+    <section class="faq">
+      <!-- ShalloWeDive FAQ -->
+      <div class="faq__section fade-in">
+        <h2 class="faq__section-title">
+          <span class="faq__section-icon faq__section-icon--ocean">S</span>
+          ShalloWeDive
+        </h2>
+
+        <div class="faq__item">
+          <button class="faq__question" aria-expanded="false">
+            What devices are supported?
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq__answer">
+            <div class="faq__answer-inner">
+              ShalloWeDive works on iPhone and Apple Watch. The Apple Watch is required for underwater depth and temperature tracking during dives.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq__item">
+          <button class="faq__question" aria-expanded="false">
+            How does the safety zone system work?
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq__answer">
+            <div class="faq__answer-inner">
+              ShalloWeDive uses a 4-level safety zone system based on AIDA International guidelines. The zones are determined by your depth and dive duration, providing real-time visual feedback on your safety status.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq__item">
+          <button class="faq__question" aria-expanded="false">
+            Is my dive data private?
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq__answer">
+            <div class="faq__answer-inner">
+              Yes. All your dive data is stored locally on your device. We do not collect, upload, or share any personal or health data.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Memories FAQ -->
+      <div class="faq__section fade-in">
+        <h2 class="faq__section-title">
+          <span class="faq__section-icon faq__section-icon--warm">M</span>
+          Memories
+        </h2>
+
+        <div class="faq__item">
+          <button class="faq__question" aria-expanded="false">
+            Where are my memories stored?
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq__answer">
+            <div class="faq__answer-inner">
+              Your memories are stored locally on your iPhone. No data is uploaded to any cloud service, ensuring complete privacy.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq__item">
+          <button class="faq__question" aria-expanded="false">
+            Can I export my memories?
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq__answer">
+            <div class="faq__answer-inner">
+              The app focuses on providing a beautiful in-app experience. For any specific export needs, feel free to contact us and we'll do our best to help.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq__item">
+          <button class="faq__question" aria-expanded="false">
+            Is Memories free to use?
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq__answer">
+            <div class="faq__answer-inner">
+              Please check the App Store listing for the most up-to-date pricing information.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact-section fade-in">
+      <h2 class="contact-section__title">Still Need Help?</h2>
+      <p class="contact-section__desc">We're happy to help. Send us an email and we'll get back to you as soon as possible.</p>
+      <a href="mailto:andy@andygile.com" class="btn btn--primary btn--lg">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+        </svg>
+        andy@andygile.com
+      </a>
+    </section>
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    // FAQ accordion
+    document.addEventListener('click', function (e) {
+      var question = e.target.closest('.faq__question');
+      if (!question) return;
+      var item = question.closest('.faq__item');
+      var isOpen = item.classList.contains('open');
+      item.classList.toggle('open');
+      question.setAttribute('aria-expanded', !isOpen);
+    });
+  </script>
+</body>
+</html>

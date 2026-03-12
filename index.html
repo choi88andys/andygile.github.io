@@ -1,55 +1,173 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-base=".">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Andygile</title>
-  <style>
-    :root {
-      --bg: #f9fafb;
-      --text: #1f2937;
-      --accent: #3b82f6;
-    }
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-      background-color: var(--bg);
-      color: var(--text);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      text-align: center;
-      padding: 0 1rem;
-    }
-    main {
-      max-width: 600px;
-    }
-    h1 {
-      font-size: 2.75rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
-    }
-    p {
-      font-size: 1.125rem;
-      line-height: 1.6;
-      color: #4b5563;
-    }
-    footer {
-      margin-top: 3rem;
-      font-size: 0.875rem;
-      color: #9ca3af;
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Andygile — Apps for the Apple Ecosystem</title>
+  <meta name="description" content="Andygile crafts thoughtful apps for the Apple ecosystem. Explore ShalloWeDive for freediving and Memories for preserving your moments.">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Andygile — Apps for the Apple Ecosystem">
+  <meta property="og:description" content="Crafting thoughtful apps for the Apple ecosystem.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://andygile.com">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="assets/css/global.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/home.css">
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Andygile",
+    "url": "https://andygile.com",
+    "email": "andy@andygile.com",
+    "description": "Crafting thoughtful apps for the Apple ecosystem."
+  }
+  </script>
 </head>
 <body>
-  <main>
-    <h1>Andygile</h1>
-    <p>
-      We’re building something new.<br />
-      Contact: andy@andygile.com
-    </p>
-    <footer>&copy; 2025 Andygile. All rights reserved.</footer>
+  <a href="#main-content" class="skip-link">Skip to content</a>
+
+  <!-- Nav -->
+  <div id="nav-placeholder"></div>
+
+  <main id="main-content">
+    <!-- Hero -->
+    <section class="hero">
+      <h1 class="hero__tagline">
+        Crafting Apps for the<br>
+        <span class="hero__tagline-gradient">Apple Ecosystem</span>
+      </h1>
+      <p class="hero__subtitle">
+        We build focused, beautifully designed apps that make the most of Apple platforms.
+      </p>
+      <div class="hero__cta">
+        <a href="#apps" class="btn btn--primary btn--lg">See Our Apps</a>
+        <a href="/support/" class="btn btn--secondary btn--lg">Get in Touch</a>
+      </div>
+      <div class="hero__scroll-hint" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 12 15 18 9"/>
+        </svg>
+      </div>
+    </section>
+
+    <!-- Apps Showcase -->
+    <section id="apps" class="section apps">
+      <div class="container">
+        <div class="section__header fade-in">
+          <h2 class="section__title">Our Apps</h2>
+          <p class="section__subtitle">Designed with care, built with Swift.</p>
+        </div>
+        <div class="apps__grid">
+          <!-- ShalloWeDive -->
+          <a href="/shallowedive/" class="card card--ocean app-card fade-in">
+            <div class="app-card__icon app-card__icon--placeholder app-card__icon--ocean">
+              <!-- Replace with: <img src="assets/images/shallowedive/icon.png" alt="ShalloWeDive icon"> -->
+              S
+            </div>
+            <h3 class="app-card__name">ShalloWeDive</h3>
+            <p class="app-card__desc">Your intelligent freediving companion for Apple Watch and iPhone.</p>
+            <span class="btn btn--ocean btn--sm">Learn More</span>
+          </a>
+          <!-- Memories -->
+          <a href="/memories/" class="card card--warm app-card fade-in">
+            <div class="app-card__icon app-card__icon--placeholder app-card__icon--warm">
+              <!-- Replace with: <img src="assets/images/memories/icon.png" alt="Memories icon"> -->
+              M
+            </div>
+            <h3 class="app-card__name">Memories</h3>
+            <p class="app-card__desc">Preserve and relive your most meaningful moments.</p>
+            <span class="btn btn--warm btn--sm">Learn More</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="section">
+      <div class="container">
+        <div class="section__header fade-in">
+          <h2 class="section__title">About</h2>
+        </div>
+        <div class="about__content fade-in">
+          <p class="about__text">
+            Andygile is a one-person studio dedicated to building apps that feel native, intuitive, and purposeful.
+            Every app is crafted with the latest Apple technologies — from SwiftUI and HealthKit to WatchKit and beyond.
+          </p>
+          <div class="tech-stack">
+            <div class="tech-stack__item">
+              <div class="tech-stack__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+                </svg>
+              </div>
+              <span class="tech-stack__label">Swift</span>
+            </div>
+            <div class="tech-stack__item">
+              <div class="tech-stack__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+                </svg>
+              </div>
+              <span class="tech-stack__label">SwiftUI</span>
+            </div>
+            <div class="tech-stack__item">
+              <div class="tech-stack__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+                </svg>
+              </div>
+              <span class="tech-stack__label">WatchKit</span>
+            </div>
+            <div class="tech-stack__item">
+              <div class="tech-stack__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                </svg>
+              </div>
+              <span class="tech-stack__label">HealthKit</span>
+            </div>
+            <div class="tech-stack__item">
+              <div class="tech-stack__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/>
+                </svg>
+              </div>
+              <span class="tech-stack__label">UIKit</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Blog Preview (hidden until posts exist) -->
+    <section id="blog-preview" class="section" style="display: none;">
+      <div class="container">
+        <div class="section__header">
+          <h2 class="section__title">Latest from the Blog</h2>
+          <p class="section__subtitle">Thoughts on iOS development, Swift, and building apps.</p>
+        </div>
+        <div class="blog-preview__grid" id="home-blog-grid"></div>
+        <div style="text-align: center; margin-top: 2rem;">
+          <a href="/blog/" class="btn btn--secondary">View All Posts</a>
+        </div>
+      </div>
+    </section>
   </main>
+
+  <!-- Footer -->
+  <div id="footer-placeholder"></div>
+
+  <script src="assets/js/main.js"></script>
 </body>
 </html>

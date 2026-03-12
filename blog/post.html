@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" data-base="..">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog Post — Andygile</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="../assets/css/global.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/blog.css">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to content</a>
+
+  <div id="nav-placeholder"></div>
+
+  <main id="main-content">
+    <article class="post">
+      <div class="post__header">
+        <a href="/blog/" class="post__back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/>
+          </svg>
+          Back to Blog
+        </a>
+        <h1 class="post__title" id="post-title">Loading...</h1>
+        <div class="post__meta">
+          <span class="post__date" id="post-date"></span>
+          <div id="post-tags" style="display: flex; gap: 0.5rem; flex-wrap: wrap;"></div>
+        </div>
+      </div>
+      <div class="post__content" id="post-content">
+        <div class="loading">
+          <div class="loading__spinner"></div>
+          Loading post...
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/blog.js"></script>
+</body>
+</html>
