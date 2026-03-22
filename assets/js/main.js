@@ -38,6 +38,7 @@
     initScrollAnimations();
     initSmoothScroll();
     setActiveNavLink();
+    initHomeBlogPreview();
   });
 
   /* --- Component Loading ---
@@ -162,6 +163,80 @@
       var top = target.getBoundingClientRect().top + window.scrollY - offset;
       window.scrollTo({ top: top, behavior: 'smooth' });
     });
+  }
+
+  /* --- Home Blog Preview --- */
+  async function initHomeBlogPreview() {
+    var section = document.getElementById('blog-preview');
+    var grid = document.getElementById('home-blog-grid');
+    if (!section || !grid) return;
+
+    try {
+      var res = await fetch('/blog/posts/index.json');
+      if (!res.ok) return;
+      var posts = await res.json();
+      if (!posts.length) { section.style.display = 'none'; return; }
+
+      posts.sort(function (a, b) { return new Date(b.date) - new Date(a.date); });
+      var recent = posts.slice(0, 3);
+
+      var fragment = document.createDocumentFragment();
+      recent.forEach(function (post) {
+        var card = document.createElement('a');
+        card.href = '/blog/post.html?slug=' + encodeURIComponent(post.slug);
+        card.className = 'card blog-card fade-in';
+
+        var meta = document.createElement('div');
+        meta.className = 'blog-card__meta';
+        if (post.tags) {
+          post.tags.forEach(function (tag) {
+            var span = document.createElement('span');
+            span.className = 'tag';
+            span.textContent = tag;
+            meta.appendChild(span);
+          });
+        }
+
+        var title = document.createElement('h3');
+        title.className = 'blog-card__title';
+        title.textContent = post.title;
+
+        var excerpt = document.createElement('p');
+        excerpt.className = 'blog-card__excerpt';
+        excerpt.textContent = post.excerpt;
+
+        var readMore = document.createElement('span');
+        readMore.className = 'blog-card__read-more';
+        readMore.textContent = 'Read more \u2192';
+
+        card.appendChild(meta);
+        card.appendChild(title);
+        card.appendChild(excerpt);
+        card.appendChild(readMore);
+        fragment.appendChild(card);
+      });
+
+      grid.appendChild(fragment);
+
+      // Observe new fade-in elements
+      var newCards = grid.querySelectorAll('.fade-in');
+      if (newCards.length) {
+        var observer = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+        );
+        newCards.forEach(function (el) { observer.observe(el); });
+      }
+    } catch (e) {
+      section.style.display = 'none';
+    }
   }
 
   /* --- Active Nav Link --- */
