@@ -1,0 +1,232 @@
+/* ==========================================================================
+   Legal Page — Privacy Policy, Terms, Usage Information
+   ========================================================================== */
+
+/* --- Hero --- */
+.legal-hero {
+  padding: calc(var(--nav-height) + 4rem) 1.5rem 3rem;
+  text-align: center;
+}
+
+.legal-hero--ocean {
+  background: linear-gradient(180deg, #0c4a6e 0%, var(--bg-primary) 100%);
+}
+
+.legal-hero--warm {
+  background: linear-gradient(180deg, #78350f 0%, var(--bg-primary) 100%);
+}
+
+[data-theme="light"] .legal-hero--ocean {
+  background: linear-gradient(180deg, #e0f2fe 0%, var(--bg-primary) 100%);
+}
+
+[data-theme="light"] .legal-hero--warm {
+  background: linear-gradient(180deg, #fef3c7 0%, var(--bg-primary) 100%);
+}
+
+.legal-hero__title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin-bottom: 0.5rem;
+}
+
+.legal-hero__subtitle {
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+}
+
+.legal-hero__lang {
+  margin-top: 0.75rem;
+}
+
+.legal-hero__lang a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 0.375rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  transition: border-color var(--transition-fast), color var(--transition-fast);
+}
+
+.legal-hero__lang a:hover {
+  border-color: var(--accent-blue);
+  color: var(--text-primary);
+}
+
+/* --- Content --- */
+.legal {
+  padding: 0 1.5rem 4rem;
+}
+
+.legal__inner {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+/* --- Section --- */
+.legal__section {
+  margin-bottom: 3rem;
+  padding-top: 1rem;
+}
+
+.legal__heading {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.legal__divider {
+  height: 1px;
+  background: var(--border);
+  margin-bottom: 1.5rem;
+}
+
+/* --- Text --- */
+.legal__text {
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: 1rem;
+}
+
+.legal__text:last-child {
+  margin-bottom: 0;
+}
+
+.legal__text a {
+  color: var(--accent-blue);
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  transition: text-decoration-color var(--transition-fast);
+}
+
+.legal__text a:hover {
+  text-decoration-color: var(--accent-blue);
+}
+
+/* --- Lists --- */
+.legal__list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem 0;
+}
+
+.legal__list li {
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  padding-left: 1.25rem;
+  position: relative;
+  margin-bottom: 0.5rem;
+}
+
+.legal__list li::before {
+  content: "\2022";
+  position: absolute;
+  left: 0;
+  color: var(--text-secondary);
+}
+
+.legal__list li strong {
+  color: var(--text-primary);
+}
+
+/* --- Clauses --- */
+.legal__clause {
+  margin-bottom: 1.5rem;
+}
+
+.legal__clause-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+/* --- Effective Date --- */
+.legal__effective {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.8;
+  margin-top: 1.5rem;
+  padding: 1rem 1.25rem;
+  background: var(--bg-secondary);
+  border-radius: var(--border-radius-sm);
+  border: 1px solid var(--border);
+}
+
+/* --- Overview page (general /privacy/) --- */
+.legal-overview {
+  padding: 0 1.5rem 4rem;
+}
+
+.legal-overview__inner {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.legal-overview__text {
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+}
+
+.legal-overview__apps {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.legal-overview__app {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--border-radius-sm);
+  text-decoration: none;
+  color: var(--text-primary);
+  transition: border-color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.legal-overview__app:hover {
+  border-color: var(--accent-blue);
+  background: var(--bg-tertiary);
+}
+
+.legal-overview__app-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.legal-overview__app-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.legal-overview__app-dot--ocean { background: var(--accent-ocean); }
+.legal-overview__app-dot--warm { background: var(--accent-warm); }
+
+.legal-overview__app-name {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.legal-overview__app-desc {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.legal-overview__app-arrow {
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
