@@ -34,52 +34,7 @@
   }
 }
 
-/* --- Blog Card --- */
-.blog-card {
-  display: flex;
-  flex-direction: column;
-  text-decoration: none;
-}
-
-.blog-card__meta {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 0.75rem;
-}
-
-.blog-card__date {
-  font-size: 0.8125rem;
-  color: var(--text-secondary);
-}
-
-.blog-card__title {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-bottom: 0.75rem;
-  color: var(--text-primary);
-  transition: color var(--transition-fast);
-}
-
-.blog-card:hover .blog-card__title {
-  color: var(--accent-blue);
-}
-
-.blog-card__excerpt {
-  font-size: 0.9375rem;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.blog-card__read-more {
-  margin-top: auto;
-  padding-top: 1rem;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--accent-blue);
-}
+/* Blog card styles are in components.css (shared with homepage) */
 
 /* --- Blog Post --- */
 .post {
@@ -114,7 +69,15 @@
 
 .post__title {
   font-size: clamp(2rem, 4vw, 2.75rem);
+  margin-bottom: 0.5rem;
+}
+
+.post__subtitle {
+  font-size: clamp(1.125rem, 2vw, 1.375rem);
+  color: var(--text-secondary);
+  font-weight: 400;
   margin-bottom: 1rem;
+  line-height: 1.4;
 }
 
 .post__meta {

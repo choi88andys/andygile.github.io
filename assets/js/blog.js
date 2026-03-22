@@ -8,36 +8,6 @@
   var POSTS_INDEX = '/blog/posts/index.json';
   var POSTS_DIR = '/blog/posts/';
 
-  /* --- Load marked.js from CDN --- */
-  function loadMarked() {
-    return new Promise(function (resolve, reject) {
-      if (window.marked) return resolve(window.marked);
-      var script = document.createElement('script');
-      script.src = 'https://cdn.jsdelivr.net/npm/marked@12/marked.min.js';
-      script.onload = function () { resolve(window.marked); };
-      script.onerror = reject;
-      document.head.appendChild(script);
-    });
-  }
-
-  /* --- Load highlight.js from CDN --- */
-  function loadHighlightJS() {
-    return new Promise(function (resolve, reject) {
-      if (window.hljs) return resolve(window.hljs);
-
-      var link = document.createElement('link');
-      link.rel = 'stylesheet';
-      link.href = 'https://cdn.jsdelivr.net/npm/highlight.js@11/styles/github-dark.min.css';
-      document.head.appendChild(link);
-
-      var script = document.createElement('script');
-      script.src = 'https://cdn.jsdelivr.net/npm/highlight.js@11/highlight.min.js';
-      script.onload = function () { resolve(window.hljs); };
-      script.onerror = reject;
-      document.head.appendChild(script);
-    });
-  }
-
   /* --- Helpers --- */
   function formatDate(dateStr) {
     return new Date(dateStr).toLocaleDateString('en-US', {
@@ -45,12 +15,6 @@
       month: 'long',
       day: 'numeric',
     });
-  }
-
-  function escapeHTML(str) {
-    var div = document.createElement('div');
-    div.textContent = str;
-    return div.innerHTML;
   }
 
   /* --- Blog List Page --- */
@@ -63,6 +27,9 @@
       if (!res.ok) throw new Error('Failed to load posts');
       var posts = await res.json();
 
+      // Clear loading spinner
+      grid.textContent = '';
+
       if (!posts.length) {
         renderEmptyState(grid);
         return;
@@ -70,7 +37,6 @@
 
       posts.sort(function (a, b) { return new Date(b.date) - new Date(a.date); });
 
-      // Build cards using safe DOM methods
       var fragment = document.createDocumentFragment();
       posts.forEach(function (post) {
         var card = document.createElement('a');
@@ -137,8 +103,7 @@
 
   /* --- Blog Post Page ---
      Renders markdown from same-origin /blog/posts/ directory.
-     Content is developer-authored .md files, not user-submitted input.
-     marked.js sanitization is enabled by default. */
+     Content is developer-authored .md files, not user-submitted input. */
   async function initBlogPost() {
     var contentEl = document.getElementById('post-content');
     var titleEl = document.getElementById('post-title');
@@ -155,7 +120,9 @@
     }
 
     try {
+      // Load post metadata
       var indexRes = await fetch(POSTS_INDEX);
+      if (!indexRes.ok) throw new Error('Index fetch failed');
       var posts = await indexRes.json();
       var postMeta = posts.find(function (p) { return p.slug === slug; });
 
@@ -165,6 +132,12 @@
       }
 
       if (titleEl) titleEl.textContent = postMeta.title;
+      var subtitleEl = document.getElementById('post-subtitle');
+      if (subtitleEl && postMeta.subtitle) {
+        subtitleEl.textContent = postMeta.subtitle;
+      } else if (subtitleEl) {
+        subtitleEl.style.display = 'none';
+      }
       if (dateEl) dateEl.textContent = formatDate(postMeta.date);
       if (tagsEl && postMeta.tags) {
         postMeta.tags.forEach(function (tag) {
@@ -176,26 +149,39 @@
       }
       document.title = postMeta.title + ' \u2014 Andygile Blog';
 
-      var results = await Promise.all([loadMarked(), loadHighlightJS()]);
-      var markedLib = results[0];
-      var hljs = results[1];
-
+      // Fetch markdown
       var mdRes = await fetch(POSTS_DIR + encodeURIComponent(slug) + '.md');
       if (!mdRes.ok) throw new Error('Post not found');
       var md = await mdRes.text();
 
-      markedLib.setOptions({
-        highlight: function (code, lang) {
-          if (lang && hljs.getLanguage(lang)) {
-            return hljs.highlight(code, { language: lang }).value;
-          }
-          return hljs.highlightAuto(code).value;
-        },
-        breaks: true,
-      });
+      // Load marked.js and render
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/marked@14/marked.min.js';
+      script.onload = function () {
+        // Developer-authored markdown from same-origin server
+        contentEl.innerHTML = window.marked.parse(md);
 
-      // Developer-authored markdown from same-origin server
-      contentEl.innerHTML = markedLib.parse(md);
+        // Optional: syntax highlighting
+        var hlLink = document.createElement('link');
+        hlLink.rel = 'stylesheet';
+        hlLink.href = 'https://cdn.jsdelivr.net/npm/highlight.js@11/styles/github-dark.min.css';
+        document.head.appendChild(hlLink);
+
+        var hlScript = document.createElement('script');
+        hlScript.src = 'https://cdn.jsdelivr.net/npm/highlight.js@11/highlight.min.js';
+        hlScript.onload = function () {
+          contentEl.querySelectorAll('pre code').forEach(function (block) {
+            window.hljs.highlightElement(block);
+          });
+        };
+        document.head.appendChild(hlScript);
+      };
+      script.onerror = function () {
+        // Fallback: show raw markdown if marked fails to load
+        contentEl.textContent = md;
+      };
+      document.head.appendChild(script);
+
     } catch (e) {
       contentEl.textContent = 'Failed to load post.';
     }

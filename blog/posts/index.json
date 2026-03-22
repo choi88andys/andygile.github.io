@@ -1,1 +1,17 @@
-[]
+[
+  {
+    "slug": "there-is-no-flutter-app-after-build",
+    "title": "There Is No Flutter App After Build",
+    "subtitle": "Understanding Cross-Platform Development and Compilation",
+    "date": "2026-03-12",
+    "excerpt": "Understanding cross-platform development and compilation. What actually happens when Flutter code becomes an iOS app?",
+    "tags": ["Flutter", "iOS", "Engineering"]
+  },
+  {
+    "slug": "from-pandora-to-production",
+    "title": "From Pandora to Production: What Avatar Fire and Ash Taught Me About AI-Assisted Development",
+    "date": "2026-03-12",
+    "excerpt": "Is Jake Sully a persona for the director? A reflection on leadership and responsibility in the age of AI-assisted development.",
+    "tags": ["AI", "Opinion"]
+  }
+]
