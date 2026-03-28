@@ -240,6 +240,16 @@
   transform: translateY(-1px);
 }
 
+.btn--green {
+  background: var(--accent-green);
+  color: #fff;
+}
+
+.btn--green:hover {
+  background: var(--accent-green-hover);
+  transform: translateY(-1px);
+}
+
 .btn--sm {
   padding: 0.625rem 1.25rem;
   font-size: 0.875rem;
@@ -296,6 +306,14 @@
   border-color: var(--accent-warm);
 }
 
+.card--green {
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.card--green:hover {
+  border-color: var(--accent-green);
+}
+
 /* --- App Card (Showcase) --- */
 .app-card {
   display: flex;
@@ -337,6 +355,10 @@
   background: linear-gradient(135deg, #d97706, #f59e0b);
 }
 
+.app-card__icon--green {
+  background: linear-gradient(135deg, #059669, #10b981);
+}
+
 .app-card__name {
   font-size: 1.25rem;
   font-weight: 700;
@@ -371,6 +393,11 @@
 .feature-card__icon--warm {
   background: rgba(245, 158, 11, 0.15);
   color: var(--accent-warm);
+}
+
+.feature-card__icon--green {
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--accent-green);
 }
 
 .feature-card__icon svg {

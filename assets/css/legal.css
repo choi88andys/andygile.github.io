@@ -24,6 +24,14 @@
   background: linear-gradient(180deg, #fef3c7 0%, var(--bg-primary) 100%);
 }
 
+.legal-hero--green {
+  background: linear-gradient(180deg, #064e3b 0%, var(--bg-primary) 100%);
+}
+
+[data-theme="light"] .legal-hero--green {
+  background: linear-gradient(180deg, #d1fae5 0%, var(--bg-primary) 100%);
+}
+
 .legal-hero__title {
   font-size: clamp(2rem, 4vw, 3rem);
   margin-bottom: 0.5rem;
@@ -215,6 +223,7 @@
 
 .legal-overview__app-dot--ocean { background: var(--accent-ocean); }
 .legal-overview__app-dot--warm { background: var(--accent-warm); }
+.legal-overview__app-dot--green { background: var(--accent-green); }
 
 .legal-overview__app-name {
   font-weight: 600;
