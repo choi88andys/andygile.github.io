@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
+  <meta name="referrer" content="no-referrer">
+  <title>머미피디아 이메일 인증</title>
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      height: 100%;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                   "Helvetica Neue", Arial, "Apple SD Gothic Neo",
+                   "Noto Sans KR", sans-serif;
+      background: linear-gradient(180deg, #F7F7FB 0%, #EEEEF7 100%);
+      color: #1C1C1E;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .wrap {
+      min-height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 440px;
+      background: #FFFFFF;
+      padding: 48px 32px 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06),
+                  0 2px 8px rgba(0, 0, 0, 0.04);
+      text-align: center;
+    }
+
+    .icon {
+      width: 88px;
+      height: 88px;
+      margin: 0 auto 24px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, #7B6EF6 0%, #5856D6 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 24px rgba(88, 86, 214, 0.25);
+    }
+
+    .icon svg {
+      width: 44px;
+      height: 44px;
+      color: #FFFFFF;
+    }
+
+    h1 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      letter-spacing: -0.3px;
+    }
+
+    .subtitle {
+      font-size: 15px;
+      line-height: 1.6;
+      color: #6E6E73;
+      margin-bottom: 32px;
+    }
+
+    .btn {
+      display: inline-block;
+      width: 100%;
+      padding: 14px 20px;
+      background: #5856D6;
+      color: #FFFFFF;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+
+    .btn:hover { background: #4A49B8; }
+    .btn:active { background: #3F3EA6; }
+
+    .hint {
+      margin-top: 16px;
+      font-size: 13px;
+      color: #8E8E93;
+      line-height: 1.5;
+    }
+
+    .brand {
+      margin-top: 40px;
+      font-size: 12px;
+      color: #AEAEB2;
+      letter-spacing: 0.5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card" role="main">
+      <div class="icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+      </div>
+
+      <h1>이메일 인증이 완료되었습니다</h1>
+      <p class="subtitle">
+        머미피디아 앱으로 돌아가<br>
+        로그인을 진행해주세요.
+      </p>
+
+      <a href="com.andygile.mmpedia://" class="btn" id="openAppBtn">
+        앱으로 돌아가기
+      </a>
+
+      <p class="hint">
+        버튼이 작동하지 않으면<br>
+        직접 머미피디아 앱을 열어주세요.
+      </p>
+
+      <p class="brand">MMpedia · 머미피디아</p>
+    </div>
+  </div>
+</body>
+</html>
