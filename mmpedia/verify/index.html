@@ -114,13 +114,13 @@
         </svg>
       </div>
 
-      <h1>이메일 인증이 완료되었습니다</h1>
-      <p class="subtitle">
-        머미피디아 앱으로 돌아가<br>
-        로그인을 진행해주세요.
+      <h1 id="title">이메일 인증이 완료되었습니다</h1>
+      <p class="subtitle" id="subtitle">
+        <span id="subtitleLine1">머미피디아 앱으로 돌아가</span><br>
+        <span id="subtitleLine2">로그인을 진행해주세요.</span>
       </p>
 
-      <a href="com.andygile.mmpedia://" class="btn" id="openAppBtn">
+      <a href="com.andygile.mmpedia://verify" class="btn" id="openAppBtn">
         앱으로 돌아가기
       </a>
 
@@ -132,5 +132,61 @@
       <p class="brand">MMpedia · 머미피디아</p>
     </div>
   </div>
+
+  <script>
+    // Hash forwarding for Supabase email links.
+    //
+    // Supabase sends recovery / signup emails with a link to
+    // https://andygile.com/mmpedia/verify/ and appends tokens in the URL
+    // hash fragment, e.g. `#access_token=...&refresh_token=...&type=recovery`.
+    // We rewrite the "앱으로 돌아가기" button to carry the same hash to the
+    // native deep link (com.andygile.mmpedia://verify#...) so the app can
+    // restore the session and route to /reset-password.
+    //
+    // When the hash is absent (rare — manual visit or signup confirmation
+    // that delivered the session via the OTP code flow), we keep the static
+    // success UX and do not auto-trigger.
+    //
+    // All DOM writes use textContent so the hash (attacker-controllable) is
+    // never interpreted as HTML. The deep link is only used as a string
+    // value for href / location.href, which are scheme-validated by the OS.
+    (function () {
+      var hash = window.location.hash || '';
+      var params = new URLSearchParams(
+        hash.charAt(0) === '#' ? hash.slice(1) : hash
+      );
+      var hasAccessToken = params.has('access_token');
+      var type = params.get('type');
+      var supportedType = (type === 'recovery' || type === 'signup');
+
+      if (!hasAccessToken || !supportedType) {
+        // No forwardable payload — retain the default static UX.
+        return;
+      }
+
+      var deepLink = 'com.andygile.mmpedia://verify' + hash;
+      var btn = document.getElementById('openAppBtn');
+      if (btn) {
+        btn.setAttribute('href', deepLink);
+      }
+
+      // Tailor copy so users know the app is opening automatically.
+      // textContent avoids any HTML parsing of the hash-derived state.
+      if (type === 'recovery') {
+        var title = document.getElementById('title');
+        var line1 = document.getElementById('subtitleLine1');
+        var line2 = document.getElementById('subtitleLine2');
+        if (title) title.textContent = '비밀번호 재설정 페이지로 이동합니다';
+        if (line1) line1.textContent = '잠시 후 머미피디아 앱이 자동으로 열립니다.';
+        if (line2) line2.textContent = '열리지 않으면 아래 버튼을 눌러주세요.';
+      }
+
+      // Auto-trigger the deep link after 500ms so the user has a moment to
+      // see the success state before the app launches.
+      window.setTimeout(function () {
+        window.location.href = deepLink;
+      }, 500);
+    })();
+  </script>
 </body>
 </html>
