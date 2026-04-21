@@ -137,52 +137,74 @@
     // Hash forwarding for Supabase email links.
     //
     // Supabase sends recovery / signup emails with a link to
-    // https://andygile.com/mmpedia/verify/ and appends tokens in the URL
-    // hash fragment, e.g. `#access_token=...&refresh_token=...&type=recovery`.
-    // We rewrite the "앱으로 돌아가기" button to carry the same hash to the
-    // native deep link (com.andygile.mmpedia://verify#...) so the app can
-    // restore the session and route to /reset-password.
+    // https://andygile.com/mmpedia/verify/ and appends the recovery /
+    // signup payload via ONE of two mechanisms depending on the project's
+    // auth flow:
     //
-    // When the hash is absent (rare — manual visit or signup confirmation
-    // that delivered the session via the OTP code flow), we keep the static
-    // success UX and do not auto-trigger.
+    //   PKCE (Supabase default since 2024):
+    //     .../verify/?code=<uuid>
+    //   Implicit / legacy hash:
+    //     .../verify/#access_token=...&refresh_token=...&type=recovery
     //
-    // All DOM writes use textContent so the hash (attacker-controllable) is
-    // never interpreted as HTML. The deep link is only used as a string
-    // value for href / location.href, which are scheme-validated by the OS.
+    // Either form is forwarded verbatim to the native deep link
+    // (com.andygile.mmpedia://verify?code=...  OR  ...://verify#...). The
+    // Flutter app's supabase_flutter SDK calls exchangeCodeForSession on
+    // PKCE URIs, or restores the implicit session from the hash.
+    //
+    // When neither a query `code=` nor a hash `access_token=` is present,
+    // we keep the static success UX and do not auto-trigger.
+    //
+    // All DOM writes use textContent so user-provided strings are never
+    // interpreted as HTML. The deep link is only used as a string value
+    // for href / location.href, which are scheme-validated by the OS.
     (function () {
+      var search = window.location.search || '';
       var hash = window.location.hash || '';
-      var params = new URLSearchParams(
+
+      var searchParams = new URLSearchParams(
+        search.charAt(0) === '?' ? search.slice(1) : search
+      );
+      var hashParams = new URLSearchParams(
         hash.charAt(0) === '#' ? hash.slice(1) : hash
       );
-      var hasAccessToken = params.has('access_token');
-      var type = params.get('type');
-      var supportedType = (type === 'recovery' || type === 'signup');
 
-      if (!hasAccessToken || !supportedType) {
-        // No forwardable payload — retain the default static UX.
+      var hasPkceCode = searchParams.has('code');
+      var hasAccessToken = hashParams.has('access_token');
+      if (!hasPkceCode && !hasAccessToken) {
         return;
       }
 
-      var deepLink = 'com.andygile.mmpedia://verify' + hash;
+      // Type hint — present on hash URIs (`type=recovery|signup`) and on
+      // some PKCE flows (Supabase passes it through). Absent → treat as
+      // generic "return to app".
+      var type = hashParams.get('type') || searchParams.get('type');
+
+      // Preserve the original forwarding payload verbatim. Concatenate
+      // query FIRST then hash so both survive when the email link used
+      // both simultaneously (rare but defensive).
+      var deepLink = 'com.andygile.mmpedia://verify' + search + hash;
+
       var btn = document.getElementById('openAppBtn');
       if (btn) {
         btn.setAttribute('href', deepLink);
       }
 
-      // Tailor copy so users know the app is opening automatically.
-      // textContent avoids any HTML parsing of the hash-derived state.
-      if (type === 'recovery') {
+      if (type === 'recovery' || hasPkceCode) {
+        // Recovery + the PKCE code path (which lacks `type` on Supabase
+        // signup confirms but DOES cover recovery) both benefit from
+        // the "자동으로 열립니다" hint.
         var title = document.getElementById('title');
         var line1 = document.getElementById('subtitleLine1');
         var line2 = document.getElementById('subtitleLine2');
-        if (title) title.textContent = '비밀번호 재설정 페이지로 이동합니다';
+        if (title && type === 'recovery') {
+          title.textContent = '비밀번호 재설정 페이지로 이동합니다';
+        }
         if (line1) line1.textContent = '잠시 후 머미피디아 앱이 자동으로 열립니다.';
         if (line2) line2.textContent = '열리지 않으면 아래 버튼을 눌러주세요.';
       }
 
-      // Auto-trigger the deep link after 500ms so the user has a moment to
-      // see the success state before the app launches.
+      // Auto-trigger the deep link after 500ms so the user has a moment
+      // to see the success state before the app launches.
       window.setTimeout(function () {
         window.location.href = deepLink;
       }, 500);
