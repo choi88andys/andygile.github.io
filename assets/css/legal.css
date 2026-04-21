@@ -224,6 +224,7 @@
 .legal-overview__app-dot--ocean { background: var(--accent-ocean); }
 .legal-overview__app-dot--warm { background: var(--accent-warm); }
 .legal-overview__app-dot--green { background: var(--accent-green); }
+.legal-overview__app-dot--purple { background: var(--accent-purple); }
 
 .legal-overview__app-name {
   font-weight: 600;
